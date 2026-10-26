@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="智创工具箱：集合 AI 办公、内容创作、股票研究和实用小工具。">
+  <title>智创工具箱 · 让工具触手可及</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="智创工具箱首页">
+      <span class="brand-mark">智</span>
+      <span><strong>智创工具箱</strong><small>让工具触手可及</small></span>
+    </a>
+    <a class="top-link" href="#about">关于平台</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="status-dot"></span> 你的在线效率工具箱</div>
+      <h1>把好用的工具，<br><span>放在一个地方。</span></h1>
+      <p>从 AI 办公到日常实用工具，逐步打造一个简单、可靠、不断扩展的工具平台。</p>
+      <label class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="搜索工具，例如：文本、股票、写作…" autocomplete="off">
+        <kbd>搜索</kbd>
+      </label>
+      <div class="hero-note">第一版体验 · 持续更新中</div>
+    </section>
+
+    <section class="tool-section" id="tools">
+      <div class="section-heading">
+        <div><p class="eyebrow">TOOLBOX</p><h2>发现工具</h2></div>
+        <span id="resultCount" class="result-count">共 8 个工具</span>
+      </div>
+
+      <nav class="filters" aria-label="工具分类">
+        <button class="filter active" data-category="全部">全部工具</button>
+        <button class="filter" data-category="AI办公">AI 办公</button>
+        <button class="filter" data-category="AI创作">AI 创作</button>
+        <button class="filter" data-category="股票研究">股票研究</button>
+        <button class="filter" data-category="实用工具">实用工具</button>
+      </nav>
+
+      <div id="toolGrid" class="tool-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state hidden">
+        <span>⌕</span><h3>没有找到相关工具</h3><p>试试其他关键词，或选择“全部工具”。</p>
+      </div>
+    </section>
+
+    <section class="roadmap">
+      <div class="roadmap-icon">✦</div>
+      <div><h2>这是一个持续扩展的平台</h2><p>后续可以逐步加入真正可用的 AI 功能、用户收藏、账号系统和付费服务。现在先把基础框架做好。</p></div>
+    </section>
+
+    <section class="about" id="about">
+      <p class="eyebrow">ABOUT</p>
+      <h2>关于智创工具箱</h2>
+      <p>我们希望把常用的在线工具整理到一个清晰、易用的入口中。部分工具目前处于规划或演示阶段，页面会明确标注状态。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> 智创工具箱</span>
+    <span>简洁 · 实用 · 持续扩展</span>
+  </footer>
+
+  <dialog id="toolDialog" class="tool-dialog">
+    <button id="closeDialog" class="dialog-close" aria-label="关闭">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="js/tools.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
