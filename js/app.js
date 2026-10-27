@@ -82,6 +82,46 @@
         const lines = value.length ? value.split(/\\r\\n|\\r|\\n/).length : 0;
         output.textContent = `字符数（含空格）：${value.length}\\n字符数（不含空白）：${noWhitespace.length}\\n汉字数：${chinese}\\n行数：${lines}`;
       });
+       } else if (tool.id === "ai-copywriter") {
+      dialogContent.innerHTML = `
+        <div class="dialog-content">
+          <div class="dialog-icon">${escapeHTML(tool.icon)}</div>
+          <h2>AI 文案助手</h2>
+          <p>填写主题，生成一份可编辑的文案初稿。</p>
+          <label for="copyTopic">文案主题</label>
+          <input id="copyTopic" type="text" placeholder="例如：新店开业优惠活动">
+          <label for="copyType">文案用途</label>
+          <select id="copyType">
+            <option value="朋友圈">朋友圈文案</option>
+            <option value="短视频">短视频口播文案</option>
+            <option value="商品推广">商品推广文案</option>
+            <option value="宣传介绍">产品介绍文案</option>
+          </select>
+          <button class="dialog-action" id="generateCopy">生成文案</button>
+          <label for="copyResult">生成结果（可以修改）</label>
+          <textarea id="copyResult" placeholder="文案会显示在这里…"></textarea>
+          <p class="notice">当前为本地模板版，不调用在线 AI。</p>
+        </div>`;
+
+      document.getElementById("generateCopy").addEventListener("click", () => {
+        const topic = document.getElementById("copyTopic").value.trim();
+        const type = document.getElementById("copyType").value;
+        const result = document.getElementById("copyResult");
+
+        if (!topic) {
+          alert("请先填写文案主题。");
+          return;
+        }
+
+        const templates = {
+          "朋友圈": `好消息！今天和大家分享：${topic}。如果你也感兴趣，欢迎留言交流，了解更多详情！`,
+          "短视频": `你是否关注${topic}？今天我们来聊聊它的特点和实用信息。如果觉得有帮助，欢迎点赞、收藏并留言交流！`,
+          "商品推广": `正在了解${topic}？我们整理了相关特点与使用场景，帮助你更好地比较和选择。欢迎咨询详情！`,
+          "宣传介绍": `关于${topic}：我们希望通过清晰、实用的介绍，帮助大家了解相关特点和适用场景。欢迎进一步交流！`
+        };
+
+        result.value = templates[type];
+      });
     } else {
       dialogContent.innerHTML = `
         <div class="dialog-content">
