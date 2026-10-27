@@ -82,7 +82,7 @@
         const lines = value.length ? value.split(/\\r\\n|\\r|\\n/).length : 0;
         output.textContent = `字符数（含空格）：${value.length}\\n字符数（不含空白）：${noWhitespace.length}\\n汉字数：${chinese}\\n行数：${lines}`;
       });
-       } else if (tool.id === "ai-copywriter") {
+       } else if (tool.id === "ai-writer") {
       dialogContent.innerHTML = `
         <div class="dialog-content">
           <div class="dialog-icon">${escapeHTML(tool.icon)}</div>
