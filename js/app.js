@@ -103,6 +103,12 @@
   <option value="轻松活泼">轻松活泼</option>
   <option value="吸引眼球">吸引眼球</option>
 </select>
+<label for="copyLength">文案长度</label>
+<select id="copyLength">
+  <option value="短">短文案</option>
+  <option value="中">中等长度</option>
+  <option value="长">长文案</option>
+</select>
           <button class="dialog-action" id="generateCopy">生成文案</button>
           <label for="copyResult">生成结果（可以修改）</label>
           <textarea id="copyResult" placeholder="文案会显示在这里…"></textarea>
@@ -114,6 +120,7 @@
         const topic = document.getElementById("copyTopic").value.trim();
         const type = document.getElementById("copyType").value;
         const style = document.getElementById("copyStyle").value;
+        const length = document.getElementById("copyLength").value;
         const result = document.getElementById("copyResult");
 
         if (!topic) {
@@ -134,7 +141,14 @@ const styleTexts = {
   "轻松活泼": `来看看${topic}！整理了一些实用信息和有趣的亮点，希望能给你带来灵感。感兴趣的话，欢迎一起交流！`,
   "吸引眼球": `别错过${topic}！有哪些值得关注的亮点？一起来了解实用信息，发现更多可能！`,
 };
-result.value = `${styleTexts[style]}\n\n${baseText}`;
+const fullText = `${styleTexts[style]}\n\n${baseText}`;
+if (length === "短") {
+  result.value = fullText.slice(0, 60);
+} else if (length === "中") {
+  result.value = fullText.slice(0, 150);
+} else {
+  result.value = fullText + `\n\n欢迎进一步了解${topic}的更多信息，欢迎留言交流。`;
+}
               document.getElementById("copyCopyResult").addEventListener("click", async () => {
         const result = document.getElementById("copyResult");
         if (!result.value.trim()) {
