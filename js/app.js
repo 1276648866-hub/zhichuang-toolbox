@@ -110,6 +110,7 @@
   <option value="长">长文案</option>
 </select>
           <button class="dialog-action" id="generateCopy">生成文案</button>
+          <button class="dialog-action" id="regenerateCopy">重新生成</button>
           <label for="copyResult">生成结果（可以修改）</label>
           <textarea id="copyResult" placeholder="文案会显示在这里…"></textarea>
           <button class="dialog-action" id="copyCopyResult">复制文案</button>
@@ -149,6 +150,9 @@ if (length === "短") {
 } else {
   result.value = fullText + `\n\n欢迎进一步了解${topic}的更多信息，欢迎留言交流。`;
 }
+              document.getElementById("regenerateCopy").addEventListener("click", () => {
+        document.getElementById("generateCopy").click();
+      });
               document.getElementById("copyCopyResult").addEventListener("click", async () => {
         const result = document.getElementById("copyResult");
         if (!result.value.trim()) {
