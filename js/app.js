@@ -97,6 +97,12 @@
             <option value="商品推广">商品推广文案</option>
             <option value="宣传介绍">产品介绍文案</option>
           </select>
+          <label for="copyStyle">文案风格</label>
+<select id="copyStyle">
+  <option value="正式专业">正式专业</option>
+  <option value="轻松活泼">轻松活泼</option>
+  <option value="吸引眼球">吸引眼球</option>
+</select>
           <button class="dialog-action" id="generateCopy">生成文案</button>
           <label for="copyResult">生成结果（可以修改）</label>
           <textarea id="copyResult" placeholder="文案会显示在这里…"></textarea>
@@ -107,6 +113,7 @@
       document.getElementById("generateCopy").addEventListener("click", () => {
         const topic = document.getElementById("copyTopic").value.trim();
         const type = document.getElementById("copyType").value;
+        const style = document.getElementById("copyStyle").value;
         const result = document.getElementById("copyResult");
 
         if (!topic) {
@@ -121,7 +128,13 @@
           "宣传介绍": `关于${topic}：我们希望通过清晰、实用的介绍，帮助大家了解相关特点和适用场景。欢迎进一步交流！`
         };
 
-        result.value = templates[type];
+        const baseText = templates[type];
+const styleTexts = {
+  "正式专业": `关于${topic}，我们将为您提供清晰、专业的信息与实用建议，帮助您更好地了解相关特点及应用价值。`,
+  "轻松活泼": `来看看${topic}！整理了一些实用信息和有趣的亮点，希望能给你带来灵感。感兴趣的话，欢迎一起交流！`,
+  "吸引眼球": `别错过${topic}！有哪些值得关注的亮点？一起来了解实用信息，发现更多可能！`,
+};
+result.value = `${styleTexts[style]}\n\n${baseText}`;
               document.getElementById("copyCopyResult").addEventListener("click", async () => {
         const result = document.getElementById("copyResult");
         if (!result.value.trim()) {
