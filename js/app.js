@@ -100,6 +100,7 @@
           <button class="dialog-action" id="generateCopy">生成文案</button>
           <label for="copyResult">生成结果（可以修改）</label>
           <textarea id="copyResult" placeholder="文案会显示在这里…"></textarea>
+          <button class="dialog-action" id="copyCopyResult">复制文案</button>
           <p class="notice">当前为本地模板版，不调用在线 AI。</p>
         </div>`;
 
@@ -121,6 +122,22 @@
         };
 
         result.value = templates[type];
+              document.getElementById("copyCopyResult").addEventListener("click", async () => {
+        const result = document.getElementById("copyResult");
+        if (!result.value.trim()) {
+          alert("请先生成或输入文案。");
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(result.value);
+          alert("文案已复制！");
+        } catch (error) {
+          result.focus();
+          result.select();
+          const copied = document.execCommand("copy");
+          alert(copied ? "文案已复制！" : "复制失败，请长按文案手动复制。");
+        }
+      });       
       });
     } else {
       dialogContent.innerHTML = `
